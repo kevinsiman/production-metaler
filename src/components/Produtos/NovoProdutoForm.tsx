@@ -260,6 +260,11 @@ export const NovoProdutoForm = () => {
               <TextField label="Materia Prima" {...params} />
             )}
           />
+          {materialSelect ? (
+            <>
+              {materialSelect?.label} R${materialSelect?.valuekg} por Quilo
+            </>
+          ) : null}
         </Grid>
         <Grid item sm={2.4}>
           <TextField
