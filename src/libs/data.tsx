@@ -100,6 +100,8 @@ export const tratamentoSuperficialOptions = [
   { label: "Carbonitação", loteMinimo: 35, pricekg: 4.0 },
   { label: "Cromo duro", loteMinimo: 35, pricekg: 5.22 },
   { label: "Zincagem", loteMinimo: 35, pricekg: 5.29 },
+  { label: "Niquel Quimico", loteMinimo: 35, pricekg: 36.0 },
+  { label: "Niquel Eletrolitico", loteMinimo: 35, pricekg: 16.0 },
 ];
 
 export const terceirizacaoOptions = [

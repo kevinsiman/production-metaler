@@ -166,7 +166,7 @@ export const DataGridOrcamento = ({ reloadData }: DataGridOrcamentoProps) => {
         headerName: "Data de Entrega",
         width: 150,
         cellClassName: (params: GridCellParams<number>) => {
-          return clsx("time", {
+          return clsx("grids time", {
             negative: moment(params.value).format() < atualDate,
             positive: moment(params.value).format() > atualDate,
             today: moment(params.value).format() == atualDate,
@@ -214,6 +214,7 @@ export const DataGridOrcamento = ({ reloadData }: DataGridOrcamentoProps) => {
       {
         field: "created_at",
         headerName: "Criado em",
+        type: "date",
         width: 170,
         renderCell: (params: GridRenderCellParams) => (
           <>{moment(params.value).format("DD/MM/YYYY HH:mm")}</>

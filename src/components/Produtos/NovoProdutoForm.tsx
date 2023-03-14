@@ -54,6 +54,13 @@ export const NovoProdutoForm = () => {
     tt: string;
     ts: string;
     terceirizacao: [{ id?: string; nome?: string; valor?: number }] | any;
+    hr_torno: number;
+    hr_torno_convencional: number;
+    hr_cnc: number;
+    hr_retifica: number;
+    hr_fresa: number;
+    hr_erosao_fio: number;
+    hr_erosao_penetracao: number;
   }>({
     nome: "",
     referencia: "",
@@ -65,6 +72,13 @@ export const NovoProdutoForm = () => {
     tt: "",
     ts: "",
     terceirizacao: [],
+    hr_torno: 0,
+    hr_torno_convencional: 0,
+    hr_cnc: 0,
+    hr_retifica: 0,
+    hr_fresa: 0,
+    hr_erosao_fio: 0,
+    hr_erosao_penetracao: 0,
   });
 
   const [terceirizacao, setTerceirizacao] = useState<{
@@ -131,6 +145,8 @@ export const NovoProdutoForm = () => {
       });
     }
   };
+
+  console.log(product);
 
   const deleteTerceirizacao = (id: number) => {
     setProduct({
@@ -251,6 +267,7 @@ export const NovoProdutoForm = () => {
             label="X"
             fullWidth
             defaultValue={product.x}
+            onFocus={(e) => e.target.select()}
             onChange={(e) =>
               setProduct({ ...product, x: Number(e.target.value) })
             }
@@ -262,6 +279,7 @@ export const NovoProdutoForm = () => {
             label="Y"
             fullWidth
             defaultValue={product.y}
+            onFocus={(e) => e.target.select()}
             onChange={(e) =>
               setProduct({ ...product, y: Number(e.target.value) })
             }
@@ -273,6 +291,7 @@ export const NovoProdutoForm = () => {
             label="Z"
             fullWidth
             defaultValue={product.z}
+            onFocus={(e) => e.target.select()}
             onChange={(e) =>
               setProduct({ ...product, z: Number(e.target.value) })
             }
@@ -325,6 +344,13 @@ export const NovoProdutoForm = () => {
               <TextField label="Tratamento Termico" {...params} />
             )}
           />
+          <Box>
+            {ttSelect ? (
+              <>
+                {ttSelect?.label} R${tsSelect?.pricekg.toFixed(2)} por Quilo
+              </>
+            ) : null}
+          </Box>
         </Grid>
         <Grid item sm={4}>
           <TextField
@@ -356,6 +382,13 @@ export const NovoProdutoForm = () => {
               <TextField label="Tratamento Superficial" {...params} />
             )}
           />
+          <Box>
+            {tsSelect ? (
+              <>
+                {tsSelect?.label} R${tsSelect?.pricekg.toFixed(2)} por Quilo
+              </>
+            ) : null}
+          </Box>
         </Grid>
         <Grid item sm={4}>
           <TextField
@@ -393,10 +426,10 @@ export const NovoProdutoForm = () => {
             type="number"
             fullWidth
             onChange={(e) =>
-              setHoraMaquina({ ...horaMaquina, centro: Number(e.target.value) })
+              setProduct({ ...product, hr_cnc: Number(e.target.value) })
             }
           />
-          <Box>R${horaMaquina.centro * centro || null}</Box>
+          <Box>R${product.hr_cnc * centro || null}</Box>
         </Grid>
         <Grid sx={{ textAlign: "center" }} item sm={3}>
           <TextField
@@ -410,13 +443,13 @@ export const NovoProdutoForm = () => {
             type="number"
             fullWidth
             onChange={(e) =>
-              setHoraMaquina({
-                ...horaMaquina,
-                tornoCNC: Number(e.target.value),
+              setProduct({
+                ...product,
+                hr_torno: Number(e.target.value),
               })
             }
           />
-          <Box>R${horaMaquina.tornoCNC * tornoCNC || null}</Box>
+          <Box>R${product.hr_torno * tornoCNC || null}</Box>
         </Grid>
         <Grid sx={{ textAlign: "center" }} item sm={3}>
           <TextField
@@ -430,13 +463,13 @@ export const NovoProdutoForm = () => {
             type="number"
             fullWidth
             onChange={(e) =>
-              setHoraMaquina({
-                ...horaMaquina,
-                tornoMecanico: Number(e.target.value),
+              setProduct({
+                ...product,
+                hr_torno_convencional: Number(e.target.value),
               })
             }
           />
-          <Box>R${horaMaquina.tornoMecanico * tornoMecanico || null}</Box>
+          <Box>R${product.hr_torno_convencional * tornoMecanico || null}</Box>
         </Grid>
         <Grid sx={{ textAlign: "center" }} item sm={3}>
           <TextField
@@ -450,13 +483,13 @@ export const NovoProdutoForm = () => {
             type="number"
             fullWidth
             onChange={(e) =>
-              setHoraMaquina({
-                ...horaMaquina,
-                fresa: Number(e.target.value),
+              setProduct({
+                ...product,
+                hr_fresa: Number(e.target.value),
               })
             }
           />
-          <Box>R${horaMaquina.fresa * fresa || null}</Box>
+          <Box>R${product.hr_fresa * fresa || null}</Box>
         </Grid>
 
         <Grid item sm={12}>
