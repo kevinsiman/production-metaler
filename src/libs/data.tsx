@@ -23,6 +23,12 @@ export const MaterialOptions = [
     name: "INOX 410",
   },
   {
+    valuekg: 79.0,
+    density: 7.9,
+    label: "INOX 316",
+    name: "INOX 316",
+  },
+  {
     valuekg: 60.0,
     density: 2.75,
     label: "ALUMINIO 5052",
