@@ -260,11 +260,7 @@ export const NovoProdutoForm = () => {
               <TextField label="Materia Prima" {...params} />
             )}
           />
-          {materialSelect ? (
-            <>
-              {materialSelect?.label} R${materialSelect?.valuekg} por Quilo
-            </>
-          ) : null}
+          {materialSelect ? <>R${materialSelect?.valuekg} por quilo</> : null}
         </Grid>
         <Grid item sm={2.4}>
           <TextField
@@ -350,11 +346,7 @@ export const NovoProdutoForm = () => {
             )}
           />
           <Box>
-            {ttSelect ? (
-              <>
-                {ttSelect?.label} R${tsSelect?.pricekg.toFixed(2)} por Quilo
-              </>
-            ) : null}
+            {ttSelect ? <>R${ttSelect?.pricekg.toFixed(2)} por quilo</> : null}
           </Box>
         </Grid>
         <Grid item sm={4}>
@@ -388,11 +380,7 @@ export const NovoProdutoForm = () => {
             )}
           />
           <Box>
-            {tsSelect ? (
-              <>
-                {tsSelect?.label} R${tsSelect?.pricekg.toFixed(2)} por Quilo
-              </>
-            ) : null}
+            {tsSelect ? <>R${tsSelect?.pricekg.toFixed(2)} por quilo</> : null}
           </Box>
         </Grid>
         <Grid item sm={4}>
