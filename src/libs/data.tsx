@@ -19,8 +19,8 @@ export const MaterialOptions = [
     id: 12,
     valuekg: 120.0,
     density: 7.9,
-    label: "INOX 410",
-    name: "INOX 410",
+    label: "INOX 310",
+    name: "INOX 310",
   },
   {
     valuekg: 79.0,
