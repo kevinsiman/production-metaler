@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import { v4 as uuid } from "uuid";
 
 import {
@@ -20,6 +20,7 @@ import {
 } from "../../libs/data";
 import Button from "@mui/material/Button";
 import { HandleCalculate } from "../../CalcularPeso/Calculadora";
+import { api } from "../../libs/api";
 
 type productType = {
   referencia: string;
@@ -55,12 +56,19 @@ export const NovoProdutoForm = () => {
     ts: string;
     terceirizacao: [{ id?: string; nome?: string; valor?: number }] | any;
     hr_torno: number;
+    vl_torno: number;
     hr_torno_convencional: number;
+    vl_torno_convencional: number;
     hr_cnc: number;
+    vl_cnc: number;
     hr_retifica: number;
+    vl_retifica: number;
     hr_fresa: number;
+    vl_fresa: number;
     hr_erosao_fio: number;
+    vl_erosao_fio: number;
     hr_erosao_penetracao: number;
+    vl_erosao_penetracao: number;
   }>({
     nome: "",
     referencia: "",
@@ -73,12 +81,19 @@ export const NovoProdutoForm = () => {
     ts: "",
     terceirizacao: [],
     hr_torno: 0,
+    vl_torno: 0,
     hr_torno_convencional: 0,
+    vl_torno_convencional: 0,
     hr_cnc: 0,
+    vl_cnc: 0,
     hr_retifica: 0,
+    vl_retifica: 0,
     hr_fresa: 0,
+    vl_fresa: 0,
     hr_erosao_fio: 0,
+    vl_erosao_fio: 0,
     hr_erosao_penetracao: 0,
+    vl_erosao_penetracao: 0,
   });
 
   const [terceirizacao, setTerceirizacao] = useState<{
@@ -146,8 +161,6 @@ export const NovoProdutoForm = () => {
     }
   };
 
-  console.log(product);
-
   const deleteTerceirizacao = (id: number) => {
     setProduct({
       ...product,
@@ -156,6 +169,28 @@ export const NovoProdutoForm = () => {
       ),
     });
   };
+
+  const calculateHrCNC = () => {
+    let x: number;
+    x = product.hr_cnc * centro;
+    setProduct({ ...product, vl_cnc: x });
+  };
+  const calculateHrTorno = () => {
+    let x: number;
+    x = product.hr_torno * tornoCNC;
+    setProduct({ ...product, vl_torno: x });
+  };
+  const calculateHrFresa = () => {
+    let x: number;
+    x = product.hr_fresa * fresa;
+    setProduct({ ...product, vl_fresa: x });
+  };
+
+  useEffect(() => {
+    calculateHrCNC();
+    calculateHrTorno();
+    calculateHrFresa();
+  }, [product.hr_cnc, product.hr_torno, product.hr_fresa]);
 
   useEffect(() => {
     let x: number = 0;
@@ -217,6 +252,16 @@ export const NovoProdutoForm = () => {
   }, [product.peso, ttSelect, tsSelect]);
 
   const handleCalculate = new HandleCalculate();
+  console.log(product);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (product.referencia) {
+      await api.post("/pd_product/create", product).then(({ data }) => {
+        console.log(data);
+      });
+    }
+  };
 
   return (
     <Paper
@@ -227,7 +272,12 @@ export const NovoProdutoForm = () => {
         padding: "40px",
       }}
     >
-      <Grid container component="form" spacing={4}>
+      <Grid
+        onSubmit={(e) => handleSubmit(e)}
+        container
+        component="form"
+        spacing={4}
+      >
         <Grid item sm={6}>
           <TextField
             type="text"
@@ -409,6 +459,9 @@ export const NovoProdutoForm = () => {
         </Grid>
         <Grid sx={{ textAlign: "center" }} item sm={3}>
           <TextField
+            inputProps={{
+              step: 0.1,
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">hr</InputAdornment>
@@ -419,39 +472,25 @@ export const NovoProdutoForm = () => {
             type="number"
             fullWidth
             onChange={(e) =>
-              setProduct({ ...product, hr_cnc: Number(e.target.value) })
+              setProduct({
+                ...product,
+                hr_cnc: Number(e.target.value),
+              })
             }
           />
           <Box>R${product.hr_cnc * centro || null}</Box>
         </Grid>
         <Grid sx={{ textAlign: "center" }} item sm={3}>
           <TextField
+            inputProps={{
+              step: 0.1,
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">hr</InputAdornment>
               ),
             }}
             label="Torno Mecanico"
-            placeholder="Horas"
-            type="number"
-            fullWidth
-            onChange={(e) =>
-              setProduct({
-                ...product,
-                hr_torno: Number(e.target.value),
-              })
-            }
-          />
-          <Box>R${product.hr_torno * tornoCNC || null}</Box>
-        </Grid>
-        <Grid sx={{ textAlign: "center" }} item sm={3}>
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">hr</InputAdornment>
-              ),
-            }}
-            label="Torno CNC"
             placeholder="Horas"
             type="number"
             fullWidth
@@ -466,6 +505,32 @@ export const NovoProdutoForm = () => {
         </Grid>
         <Grid sx={{ textAlign: "center" }} item sm={3}>
           <TextField
+            inputProps={{
+              step: 0.1,
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">hr</InputAdornment>
+              ),
+            }}
+            label="Torno CNC"
+            placeholder="Horas"
+            type="number"
+            fullWidth
+            onChange={(e) =>
+              setProduct({
+                ...product,
+                hr_torno: Number(e.target.value),
+              })
+            }
+          />
+          <Box>R${product.hr_torno * tornoCNC || null}</Box>
+        </Grid>
+        <Grid sx={{ textAlign: "center" }} item sm={3}>
+          <TextField
+            inputProps={{
+              step: 0.1,
+            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">hr</InputAdornment>
@@ -561,6 +626,11 @@ export const NovoProdutoForm = () => {
             </Grid>
           </React.Fragment>
         ))}
+        <Grid item sm={12}>
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </Grid>
       </Grid>
     </Paper>
   );
