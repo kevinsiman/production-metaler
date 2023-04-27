@@ -60,7 +60,7 @@ export const MaterialOptions = [
     valuekg: 72.0,
     density: 1.41,
     label: "POLIACETAL (POM)",
-    name: "POLIACETAL",
+    name: "POLIACETAL (POM)",
   },
   { valuekg: 120.0, density: 1.41, label: "TEFLON", name: "TEFLON" },
   { valuekg: 40.0, density: 1.35, label: "CELERON", name: "CELERON" },
@@ -68,7 +68,7 @@ export const MaterialOptions = [
     valuekg: 60.0,
     density: 1.35,
     label: "POLIURETANO (PU)",
-    name: "POLIURETANO",
+    name: "POLIURETANO (PU)",
   },
   {
     valuekg: 60.0,
