@@ -1,6 +1,6 @@
 export const MaterialOptions = [
-  { valuekg: 9,90, density: 7.85, label: "SAE 1020", name: "SAE 1020" },
-  { valuekg: 11,28, density: 7.85, label: "SAE 1045", name: "SAE 1045" },
+  { valuekg: 9.90, density: 7.85, label: "SAE 1020", name: "SAE 1020" },
+  { valuekg: 11.28, density: 7.85, label: "SAE 1045", name: "SAE 1045" },
   { valuekg: 21.0, density: 7.85, label: "SAE 4140", name: "SAE 4140" },
   { valuekg: 28.0, density: 7.85, label: "SAE 4340", name: "SAE 4340" },
   { valuekg: 20.0, density: 7.85, label: "SAE 8620", name: "SAE 8620" },
