@@ -104,6 +104,7 @@ export const tratamentoSuperficialOptions = [
   { label: "Oxidacao", loteMinimo: 35, pricekg: 4.284 },
   { label: "Galvanização", loteMinimo: 35, pricekg: 7.22 },
   { label: "Carbonitação", loteMinimo: 35, pricekg: 4.0 },
+  { label: "BICROMATIZAÇÃO", loteMinimo: 35, pricekg: 4.6 },
   { label: "Cromo duro", loteMinimo: 35, pricekg: 5.22 },
   { label: "Zincagem", loteMinimo: 35, pricekg: 5.29 },
   { label: "Niquel Quimico", loteMinimo: 35, pricekg: 36.0 },
